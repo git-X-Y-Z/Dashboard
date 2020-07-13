@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"><!-- displays site properly based on user's device -->
+    <link href="./images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+    <title>Frontend Mentor | [Dashboard]</title>
+    <style>
+        :root {
+            --tgl: hsl(225, 100%, 98%);
+            --cardhvr: hsl(232, 33%, 91%);
+        }
+
+        body {
+
+            background: hsl(0, 0%, 100%);
+
+            font-family: 'Inter', sans-serif;
+
+            transition: background .5s;
+            overflow-x: hidden;
+
+        }
+
+
+
+        .attribution {
+
+            font-size: 15px;
+
+            text-align: center;
+            margin-top: 135px;
+            font-family: monospace;
+
+        }
+
+
+
+        .attribution a {
+
+            color: hsl(228, 20%, 50%);
+            text-decoration-color: orchid;
+            color: orchid;
+
+        }
+
+
+
+        h2 {
+
+            margin: 20px 0px 5px 60px;
+
+        }
+
+
+
+        header {
+
+            background: hsl(225, 100%, 98%);
+
+            margin: -20px -7.5px 10px -8px;
+
+            padding-bottom: 100px;
+
+            padding-top: 20px;
+            box-shadow: 0 0 5px #000;
+            transition: all .5s;
+            border-radius: 0 0 12.5px 12.5px;
+
+
+
+        }
+
+
+
+        #ttlfllw {
+
+            margin: 20px 0px 5px 65px;
+
+        }
+
+
+
+        #mode {
+
+            padding-top: 25px;
+
+
+        }
+
+
+
+        .head {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            width: 90%;
+
+        }
+
+
+
+        #drkmd {
+
+            opacity: 0;
+
+            height: 0;
+
+            width: 0;
+
+        }
+
+
+
+        #toggle {
+
+            position: absolute;
+
+            cursor: pointer;
+
+            top: 0;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            background-color: hsl(230, 22%, 74%);
+
+            -webkit-transition: .4s;
+
+            transition: .4s;
+
+            border-radius: 35px;
+
+        }
+
+
+
+        #toggle::before {
+
+            position: absolute;
+
+            content: "";
+
+            height: 15px;
+
+            width: 15px;
+
+            left: 4px;
+
+            bottom: 3px;
+
+            border-radius: 50%;
+
+            background-color: var(--tgl);
+
+            -webkit-transition: all .4s;
+
+            transition: all .4s;
+
+        }
+
+
+
+        #tglCont {
+
+            position: relative;
+
+            display: inline-block;
+
+            width: 35px;
+
+            height: 20px;
+
+            background: hsl(230, 22%, 74%);
+
+            border-radius: 35px;
+
+        }
+
+
+
+        input:checked+#toggle {
+
+            background: linear-gradient(to right, hsl(210, 78%, 56%), hsl(146, 68%, 55%));
+
+        }
+
+
+
+        input:checked+#toggle:before {
+
+            -webkit-transform: translateX(12.5px);
+
+            -ms-transform: translateX(12.5px);
+
+            transform: translateX(12.5px);
+
+        }
+
+        #ovrall {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            justify-content: center;
+            position: relative;
+            top: -75px;
+
+
+        }
+
+        .card {
+            background-color: hsl(227, 47%, 96%);
+            padding: 15px 1vw;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: column;
+            text-align: center;
+            height: 180px;
+            width: 17.5vw;
+            margin: 0 15px;
+            transition: all .5s;
+            cursor: pointer;
+            animation: slidup 1s;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.64, 1.43, 0.59, 1.58);
+            opacity: 0;
+
+        }
+
+        .card:hover {
+            background-color: var(--cardhvr) !important;
+            box-shadow: 1.5px 1px 5px #00000055;
+            transform: scale(1.1) !important;
+        }
+
+        #insta {
+            border-top: 5px solid #00000000;
+            border-radius: 0 0 5px 5px;
+            margin: 0;
+            height: 175px;
+            animation-delay: 1.5s;
+        }
+
+        #in-cont {
+            background: linear-gradient(to right, hsl(37, 97%, 70%), hsl(329, 70%, 58%));
+            border-radius: 5px 5px 50px 50px;
+            padding-top: 5px;
+            margin: 0 15px;
+            animation: slid 8s;
+            animation-fill-mode: forwards;
+        }
+
+        .num {
+            font-weight: bolder;
+            font-size: 50px;
+        }
+
+        .widtxt {
+            letter-spacing: .25vw;
+        }
+
+        .svg {
+            margin-right: 5px;
+            transform: translateY(5px);
+        }
+
+        .up {
+            color: hsl(163, 72%, 41%);
+        }
+
+        .up:before {
+            content: url("./images/icon-up.svg");
+            position: relative;
+            top: -2.5px;
+            left: -2px;
+
+
+        }
+
+        .down {
+            color: hsl(356, 69%, 56%);
+        }
+
+        .down:before {
+            content: url("./images/icon-down.svg");
+            position: relative;
+            top: -2.5px;
+            left: -2px;
+
+
+        }
+
+        #ovrviwtdy {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            grid-column-gap: 25px;
+            grid-row-gap: 15px;
+            width: 0;
+
+
+        }
+
+        #ovrviwtdy>div {
+            background-color: hsl(227, 47%, 96%);
+            padding: 5px .5vw;
+            border-radius: 5px;
+            display: grid;
+            height: 70px;
+            width: 17.5vw;
+            transition: all .5s;
+            cursor: pointer;
+            grid-template-rows: auto auto;
+            grid-template-columns: auto auto;
+            padding: 15px 0;
+            animation: slidleft 1.5s 1.5s;
+            animation-timing-function: cubic-bezier(0.53, 1.15, 0.64, 1.23);
+            opacity: 0;
+            animation-fill-mode: forwards;
+
+        }
+
+
+
+
+        #ovrviwtdy>div:hover {
+            background-color: var(--cardhvr) !important;
+            box-shadow: 1.5px 1px 5px #00000055;
+            transform: scale(1.125) !important;
+        }
+
+        #flex-cont {
+            display: flex;
+            justify-content: center;
+            width: 22.5%;
+        }
+
+        .in-grid:nth-child(1) {
+            padding-left: 15px;
+
+        }
+
+        .in-grid:nth-child(2) {
+            justify-self: end;
+            align-self: start;
+            padding-right: 15px;
+
+        }
+
+        .in-grid:nth-child(3) {
+            justify-self: start;
+            align-self: end;
+            padding-left: 15px;
+
+        }
+
+        .in-grid:nth-child(4) {
+            justify-self: end;
+            align-self: end;
+            padding-right: 15px;
+
+        }
+
+        .head hr {
+            display: none;
+        }
+
+        @keyframes slidup {
+            0% {
+                transform: rotateX(90deg);
+                opacity: .5;
+            }
+
+            100% {
+                transform: rotateX(0deg);
+
+                opacity: 1;
+            }
+        }
+
+        @keyframes slid {
+            0% {
+                background: transparent;
+            }
+
+            100% {
+                background: linear-gradient(to right, hsl(37, 97%, 70%), hsl(329, 70%, 58%));
+            }
+        }
+
+
+
+        @keyframes slidleft {
+            0% {
+                transform: rotateX(90deg) rotateY(60deg)perspective(100px);
+                opacity: .5
+            }
+
+            100% {
+                transform: rotateX(0deg) perspective(100px);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            #ovrall {
+                grid-template-columns: auto auto;
+                grid-template-rows: auto auto;
+                grid-row-gap: 20px;
+            }
+
+            .card {
+                width: 27.5vw;
+            }
+
+            #ovrviwtdy {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
+            }
+
+            #ovrviwtdy>div {
+                width: 27.5vw;
+            }
+
+            #flex-cont {
+                width: 35%;
+            }
+
+        }
+
+        @media (max-width: 800px) {
+            #ovrviwtdy>div {
+                width: 35vw;
+            }
+
+            #flex-cont {
+                width: 20vw;
+            }
+        }
+
+        @media (max-width: 675px) {
+            #ovrall {
+                grid-template-columns: auto;
+                grid-template-rows: auto auto auto auto;
+                grid-row-gap: 25px;
+            }
+
+            .card {
+                width: 75vw;
+            }
+
+
+        }
+
+        @media (max-width: 675px) {
+
+            #ovrviwtdy {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            #ovrviwtdy>div {
+                width: 75vw;
+            }
+
+            #flex-cont {
+                width: 19%;
+            }
+
+            .head {
+                flex-direction: column;
+            }
+
+            .head hr {
+                display: block;
+                width: 90%;
+                border: .5px solid slategray;
+            }
+
+            #tglCont {
+                margin-left: 90%;
+                transform: translateY(-22.5px);
+            }
+
+            #mode>label:nth-child(1) {
+                padding-left: 15px;
+            }
+
+            #ttlfllw,
+            h2 {
+                margin-left: 15px;
+            }
+
+
+        }
+
+    </style>
+</head>
+
+
+
+<body>
+    <header>
+        <div class="head">
+            <div>
+                <h2>Social Media Dashboard</h2>
+                <span id="ttlfllw">Total Followers: 23,004</span>
+            </div>
+
+            <hr>
+
+            <div id="mode">
+                <label for="drkmd" onclick="chktgl();" style="cursor: pointer;">Dark Mode</label>
+                <label id="tglCont">
+                    <input id="drkmd" type="checkbox">
+                    <span id="toggle" onclick="chktgl();"></span></label>
+            </div>
+        </div>
+    </header>
+
+
+    <section id="ovrall">
+        <h2 style="display: none;">Lorem ipsum dolor sit amet, consectetur</h2>
+        <div class="card" style="border-top: 5px solid hsl(208, 92%, 53%);animation-delay: .5s;">
+            <div>
+                <svg class="svg" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.896 0H1.104C.494 0 0 .494 0 1.104v17.793C0 19.506.494 20 1.104 20h9.58v-7.745H8.076V9.237h2.606V7.01c0-2.583 1.578-3.99 3.883-3.99 1.104 0 2.052.082 2.329.119v2.7h-1.598c-1.254 0-1.496.597-1.496 1.47v1.928h2.989l-.39 3.018h-2.6V20h5.098c.608 0 1.102-.494 1.102-1.104V1.104C20 .494 19.506 0 18.896 0z" fill="#178FF5">
+                    </path>
+                </svg>@nathanf
+            </div>
+
+
+            <div>
+                <div class="num">
+                    1987
+                </div>
+
+
+                <div class="widtxt">
+                    Followers
+                </div>
+            </div>
+
+
+            <div class="up">
+                12 Today
+            </div>
+        </div>
+
+
+        <div class="card" style="border-top: 5px solid hsl(203, 89%, 53%); animation-delay: 1s;">
+            <div>
+                <svg class="svg" height="17" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 1.924a8.192 8.192 0 01-2.357.646A4.11 4.11 0 0019.448.3a8.22 8.22 0 01-2.606.996A4.096 4.096 0 0013.847 0c-2.65 0-4.596 2.472-3.998 5.037A11.648 11.648 0 011.392.752a4.109 4.109 0 001.27 5.478 4.086 4.086 0 01-1.858-.513C.76 7.616 2.122 9.395 4.095 9.79a4.113 4.113 0 01-1.853.07 4.106 4.106 0 003.833 2.849A8.25 8.25 0 010 14.41a11.616 11.616 0 006.29 1.843c7.618 0 11.922-6.434 11.663-12.205A8.354 8.354 0 0020 1.924z" fill="#1DA1F2">
+                    </path>
+                </svg>@nathanf
+            </div>
+
+
+            <div>
+                <div class="num">
+                    1044
+                </div>
+
+
+                <div class="widtxt">
+                    Followers
+                </div>
+            </div>
+
+
+            <div class="up">
+                99 Today
+            </div>
+        </div>
+
+
+        <div id="in-cont">
+            <div class="card" id="insta">
+                <div>
+                    <svg class="svg" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <lineargradient id="a" x1="100%" x2="0%" y1="0%" y2="100%">
+                                <stop offset="0%" stop-color="#DF4896">
+                                </stop>
+
+                                <stop offset="50.913%" stop-color="#EE877E">
+                                </stop>
+
+                                <stop offset="100%" stop-color="#FDC366">
+                                </stop>
+                            </lineargradient>
+                        </defs>
+
+                        <path d="M10 1.802c2.67 0 2.987.01 4.042.059 2.71.123 3.975 1.409 4.099 4.099.048 1.054.057 1.37.057 4.04 0 2.672-.01 2.988-.057 4.042-.124 2.687-1.387 3.975-4.1 4.099-1.054.048-1.37.058-4.041.058-2.67 0-2.987-.01-4.04-.058-2.717-.124-3.977-1.416-4.1-4.1-.048-1.054-.058-1.37-.058-4.041 0-2.67.01-2.986.058-4.04.124-2.69 1.387-3.977 4.1-4.1 1.054-.048 1.37-.058 4.04-.058zM10 0C7.284 0 6.944.012 5.878.06 2.246.227.228 2.242.06 5.877.01 6.944 0 7.284 0 10s.012 3.057.06 4.123c.167 3.632 2.182 5.65 5.817 5.817 1.067.048 1.407.06 4.123.06s3.057-.012 4.123-.06c3.629-.167 5.652-2.182 5.816-5.817.05-1.066.061-1.407.061-4.123s-.012-3.056-.06-4.122C19.777 2.249 17.76.228 14.124.06 13.057.01 12.716 0 10 0zm0 4.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.468a3.333 3.333 0 110-6.666 3.333 3.333 0 010 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" fill="url(#a)">
+                        </path>
+                    </svg>@realnathanf
+                </div>
+
+
+                <div>
+                    <div class="num">
+                        11k
+                    </div>
+
+
+                    <div class="widtxt">
+                        Followers
+                    </div>
+                </div>
+
+
+                <div class="up">
+                    1099 Today
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" style="border-top: 5px solid hsl(203, 89%, 53%); animation-delay: 2s;">
+            <div>
+                <svg class="svg" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 0C4.478 0 0 4.478 0 10c0 5.523 4.478 10 10 10 5.523 0 10-4.477 10-10 0-5.522-4.477-10-10-10zm3.7 14.077c-1.75.12-5.652.12-7.402 0-1.896-.13-2.117-1.059-2.131-4.077.014-3.024.237-3.947 2.131-4.077 1.75-.12 5.652-.12 7.403 0 1.897.13 2.117 1.059 2.132 4.077-.015 3.024-.237 3.947-2.132 4.077zM8.334 8.048l4.098 1.949-4.098 1.955V8.048z" fill="#C4032B">
+                    </path>
+                </svg>Nathan F.
+            </div>
+
+
+            <div>
+                <div class="num">
+                    8239
+                </div>
+
+
+                <div class="widtxt">
+                    Subscribers
+                </div>
+            </div>
+
+
+            <div class="down">
+                144 Today
+            </div>
+        </div>
+    </section>
+
+
+    <section>
+        <h3 style="margin: 50px 100px 50px 60px;">Overview - Today</h3>
+
+
+        <div id="flex-cont">
+            <div id="ovrviwtdy">
+                <div>
+                    <div class="in-grid">
+                        Page Views
+                    </div>
+                    <img alt="Facebook" class="in-grid" src="images/icon-facebook.svg">
+
+                    <div class="in-grid">
+                        87
+                    </div>
+
+
+                    <div class="in-grid up">
+                        3%
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="in-grid">
+                        Likes
+                    </div>
+                    <img alt="Facebook" class="in-grid" src="images/icon-facebook.svg">
+
+                    <div class="in-grid">
+                        52
+                    </div>
+
+
+                    <div class="in-grid down">
+                        2%
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="in-grid">
+                        Likes
+                    </div>
+                    <img alt="Instagram" class="in-grid" src="./images/icon-instagram.svg">
+
+                    <div class="in-grid">
+                        5462
+                    </div>
+
+
+                    <div class="in-grid up">
+                        2257%
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="in-grid">
+                        Profile Views
+                    </div>
+                    <img alt="Instagram" class="in-grid" src="./images/icon-instagram.svg">
+
+                    <div class="in-grid">
+                        52k
+                    </div>
+
+
+                    <div class="in-grid up">
+                        1375%
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="in-grid">
+                        Retweets
+                    </div>
+                    <img alt="Twitter" class="in-grid" src="./images/icon-twitter.svg">
+
+                    <div class="in-grid">
+                        117
+                    </div>
+
+
+                    <div class="in-grid up">
+                        303%
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="in-grid">
+                        Likes
+                    </div>
+                    <img alt="Twitter" class="in-grid" src="./images/icon-twitter.svg">
+
+                    <div class="in-grid">
+                        507
+                    </div>
+
+
+                    <div class="in-grid up">
+                        553%
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="in-grid">
+                        Likes
+                    </div>
+                    <img alt="Youtube" class="in-grid" src="./images/icon-youtube.svg">
+
+                    <div class="in-grid">
+                        107
+                    </div>
+
+
+                    <div class="in-grid down">
+                        19%
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="in-grid">
+                        Total Views
+                    </div>
+                    <img alt="Youtube" class="in-grid" src="./images/icon-youtube.svg">
+
+                    <div class="in-grid">
+                        1407
+                    </div>
+
+
+                    <div class="in-grid down">
+                        12%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="attribution">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a href="https://www.myusys.com" target="_blank">Hadi</a>.
+    </div>
+    <script>
+        var toggle = document.getElementById("drkmd");
+
+        var header = document.getElementsByTagName("header");
+        var card = document.getElementsByClassName("card");
+        let root = document.documentElement;
+        var sCard = document.querySelectorAll("#ovrviwtdy>div");
+
+
+
+        var chktgl = function() {
+
+            if (toggle.checked === true) {
+
+                document.body.style.background = "hsl(0, 0%, 100%)";
+
+                document.body.style.color = "hsl(230, 17%, 14%)";
+
+                header[0].style.background = "hsl(225, 100%, 98%)";
+
+                for (var i = 0; i < card.length; i++) {
+                    card[i].style.background = "hsl(227, 47%, 96%)";
+                }
+                root.style.setProperty('--tgl', "hsl(225, 100%, 98%)");
+                root.style.setProperty('--cardhvr', "hsl(232, 33%, 91%)");
+                for (var i = 0; i < sCard.length; i++) {
+                    sCard[i].style.background = "hsl(227, 47%, 96%)";
+                }
+
+            } else {
+
+
+
+                document.body.style.background = "hsl(230, 17%, 14%)";
+
+                document.body.style.color = "hsl(228, 34%, 66%)";
+
+                header[0].style.background = "hsl(232, 19%, 15%)";
+
+                for (var i = 0; i < card.length; i++) {
+                    card[i].style.background = "hsl(228, 28%, 20%)";
+                }
+                root.style.setProperty('--tgl', "hsl(232, 19%, 15%)");
+                root.style.setProperty('--cardhvr', "hsl(232, 35%, 35%)");
+                for (var i = 0; i < sCard.length; i++) {
+                    sCard[i].style.background = "hsl(228, 28%, 20%)";
+                }
+
+
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>
